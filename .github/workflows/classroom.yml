@@ -13,11 +13,11 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
-    - name: autograde
-      id: autograde
+    - name: test
+      id: test
       uses: classroom-resources/autograding-command-grader@v1
       with:
-        test-name: autograde
+        test-name: test
         setup-command: npm install
         command: npm test
         timeout: 10
@@ -25,6 +25,6 @@ jobs:
     - name: Autograding Reporter
       uses: classroom-resources/autograding-grading-reporter@v1
       env:
-        AUTOGRADE_RESULTS: "${{steps.autograde.outputs.result}}"
+        TEST_RESULTS: "${{steps.test.outputs.result}}"
       with:
-        runners: autograde
+        runners: test
